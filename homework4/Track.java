@@ -1,6 +1,6 @@
 package homework4;
 
-public class Track implements Actions {
+public class Track implements Obstacles {
     protected int distance;
 
     public Track(int distance) {
@@ -8,9 +8,7 @@ public class Track implements Actions {
     }
 
     @Override
-    public void run(int distance) {
-    }
-    @Override
-    public void jump(int height) {
+    public void start() {
+        System.out.println();
     }
 }

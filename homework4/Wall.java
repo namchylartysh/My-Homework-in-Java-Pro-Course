@@ -1,17 +1,13 @@
 package homework4;
 
-public class Wall implements Actions {
+public class Wall implements Obstacles {
     protected int height;
 
     public Wall(int height) {
         this.height = height;
     }
 
-
-    @Override
-    public void run(int distance) {
-    }
-    @Override
-    public void jump(int height) {
+    public void start() {
+        System.out.println();
     }
 }

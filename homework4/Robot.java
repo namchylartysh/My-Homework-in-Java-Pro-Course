@@ -4,8 +4,7 @@ public class Robot implements Actions {
     private int runLimitOfRobot;
     private int jumpLimitOfRobot;
     private String type;
-
-    public Robot(int runLimitOfRobot, int jumpLimitOfRobot) {
+    public Robot(int runLimitOfHuman, int jumpLimitOfHuman) {
         this.runLimitOfRobot = runLimitOfRobot;
         this.jumpLimitOfRobot = jumpLimitOfRobot;
         type = "Robot";

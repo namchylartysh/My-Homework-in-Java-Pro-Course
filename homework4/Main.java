@@ -9,22 +9,23 @@ package homework4;
 
 public class Main {
     public static void main(String[] args) {
-        Cat cat = new Cat(200, 1);
-        Human human = new Human(500, 3);
-        Robot robot = new Robot(300, 2);
 
-        Track track = new Track(400);
-        Wall wall = new Wall(1);
+        Human human = new Human(500, 3);
+        Cat cat = new Cat(200, 1);
+        Robot robot = new Robot(300, 2);
+        Track track = new Track(500);
+        Wall wall = new Wall(3);
 
         Actions [] subjects = {human, cat, robot};
-        Actions [] obstacles = {track, wall};
+        Obstacles [] obstacles = {track, wall};
 
         for (Actions subject : subjects) {
-            
-                subject.run(track.distance);
-                subject.jump(wall.height);
+            for (Obstacles obstacle : obstacles) {
+                if (obstacle == track)
+                    subject.run(track.distance);
+                if (obstacle == wall)
+                    subject.jump(wall.height);
+            }
         }
     }
-
-
 }
