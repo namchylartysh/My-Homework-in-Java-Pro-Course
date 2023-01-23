@@ -13,8 +13,10 @@ public class Homework19 {
 
 
     public static void main(String[] args) {
-        File file = new File(File.pathSeparator + "My Professional Java Course" +
-                File.pathSeparator + "src" + File.pathSeparator + "homework19" + File.pathSeparator + "text.txt");
+        File file = new File(sep + "My Professional Java Course" +
+                sep + "src" + sep + "homework19" + sep + "text.txt");
+
+
         System.out.println(file.exists());
         System.out.println(file.isFile());
         System.out.println(file.length());
@@ -40,8 +42,8 @@ public class Homework19 {
 
     static void fileOutputStreamDemo() {
         byte[] buffer = {48, 49, 50};
-        try (FileOutputStream fos = new FileOutputStream(File.pathSeparator + "My Professional Java Course" +
-                File.pathSeparator + "src" + File.pathSeparator + "homework19" + File.pathSeparator + "byte_file.bin")){
+        try (FileOutputStream fos = new FileOutputStream(sep + "My Professional Java Course" +
+                sep + "src" + sep + "homework19" + sep + "byte_file.bin")){
             fos.write(buffer);
         } catch (IOException e) {
             e.printStackTrace();
@@ -50,8 +52,8 @@ public class Homework19 {
 
     static void fileInputStreamDemo() {
         byte[] buffer = new byte[3];
-        try (FileInputStream fis = new FileInputStream(File.pathSeparator + "My Professional Java Course" +
-                File.pathSeparator + "src" + File.pathSeparator + "homework19" + File.pathSeparator + "byte_file.bin")){
+        try (FileInputStream fis = new FileInputStream(sep + "My Professional Java Course" +
+                sep + "src" + sep + "homework19" + sep + "byte_file.bin")){
             fis.read(buffer);
         } catch (IOException e) {
             e.printStackTrace();
@@ -62,8 +64,8 @@ public class Homework19 {
     }
 
     static void fileWriteDemo() {
-        try (FileWriter fw = new FileWriter(File.pathSeparator + "My Professional Java Course" +
-                File.pathSeparator + "src" + File.pathSeparator + File.pathSeparator + "homework19" + "char_file.txt")){
+        try (FileWriter fw = new FileWriter(sep + "My Professional Java Course" +
+                sep + "src" + sep + "homework19" + sep + "char_file.txt")){
             fw.write("Hello dudes!");
         } catch (IOException e) {
             e.printStackTrace();
@@ -72,8 +74,8 @@ public class Homework19 {
 
     static void fileReadDemo() {
         char[] buffer = new char[12];
-        try (FileReader fr = new FileReader(File.pathSeparator + "My Professional Java Course" +
-                File.pathSeparator + "src" + File.pathSeparator + "homework19" + File.pathSeparator + "char_file.txt")){
+        try (FileReader fr = new FileReader(sep + "My Professional Java Course" +
+                sep + "src" + sep + "homework19" + sep + "char_file.txt")){
             fr.read(buffer);
         } catch (IOException e) {
             e.printStackTrace();
@@ -82,9 +84,8 @@ public class Homework19 {
     }
 
     static void localHistory() {
-        File file = new File(File.pathSeparator + "My Professional Java Course" +
-                File.pathSeparator + "src" + File.pathSeparator + "homework19" + File.pathSeparator + "localHistory.txt");
-        try (Scanner scanner = new Scanner(file)) {
+        File hist = new File(sep + "My Professional Java Course" + sep + "src" + sep + "homework19" + sep + "localHistory.txt");
+        try (Scanner scanner = new Scanner(hist)) {
             while (scanner.hasNext()) {
                 System.out.println(scanner.nextLine());
             }
@@ -92,4 +93,6 @@ public class Homework19 {
             e.printStackTrace();
         }
     }
+
+    private static final String sep = File.pathSeparator;
 }
