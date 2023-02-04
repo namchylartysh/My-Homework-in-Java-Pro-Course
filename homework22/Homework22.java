@@ -4,7 +4,7 @@ package homework22;
  * Java Professional Homework #22
  *
  * @author Artysh
- * @version 30.01 - 2.02
+ * @version 30.01 - 4.02
  */
 
 import java.util.Arrays;
@@ -32,27 +32,39 @@ public class Homework22 {
         System.out.println("One thread time: " + (System.currentTimeMillis() - startTime) + " ms.");
     }
 
-    public static void secondMethod() {
+    public static void secondMethod() throws InterruptedException {
         int size = 10_000_000;
         float[] arr = new float[size];
         for (int i = 0; i < arr.length; i++) {
             arr[i] = 1.0f;
         }
         long startTime = System.currentTimeMillis();
-        // Создаем два массива для левой и правой части исходного
+
         float[] leftHalf = new float[HALF];
         float[] rightHalf = new float[HALF];
-        // Копируем в них значения из большого массива
+
         System.arraycopy(arr, 0, leftHalf, 0, HALF);
         System.arraycopy(arr, HALF, rightHalf, 0, HALF);
-        // Запускает два потока и параллельно просчитываем каждый малый массив
-        System.out.println(Arrays.toString(leftHalf));
-        System.out.println(Arrays.toString(rightHalf));
-        // Склеиваем малые массивы обратно в один большой
+
+        Thread threadOne = new Thread(() -> {
+            for (int i = 0; i < leftHalf.length; i++) {
+                leftHalf[i] = (float) (leftHalf[i] * Math.sin(0.2f + leftHalf[i] / 5) * Math.cos(0.2f + leftHalf[i] / 5) * Math.cos(0.4f + leftHalf[i] / 2));
+            }
+        });
+        Thread threadTwo = new Thread(() -> {
+            for (int i = 0; i < rightHalf.length; i++) {
+                rightHalf[i] = (float) (rightHalf[i] * Math.sin(0.2f + rightHalf[i] / 5) * Math.cos(0.2f + rightHalf[i] / 5) * Math.cos(0.4f + rightHalf[i] / 2));
+            }
+        });
+
+        threadOne.start();
+        threadTwo.start();
+        threadOne.join();
+        threadTwo.join();
+
         float[] mergedArray = new float[SIZE];
         System.arraycopy(leftHalf, 0, mergedArray, 0, HALF);
         System.arraycopy(rightHalf, 0, mergedArray, HALF, HALF);
-        System.out.println(Arrays.toString(mergedArray));
         System.out.println("Two thread time: " + (System.currentTimeMillis() - startTime) + " ms.");
     }
 
