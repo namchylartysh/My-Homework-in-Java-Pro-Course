@@ -7,6 +7,7 @@ package homework22;
  * @version 30.01 - 4.02
  */
 
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 public class Homework22 {
@@ -28,12 +29,9 @@ public class Homework22 {
     }
 
     public static void secondMethod() throws InterruptedException {
-        // Arrays.fill(arr, 1);
-//        int size = 10_000_000;
         float[] arr = new float[SIZE];
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = 1.0f;
-        }
+        Arrays.fill(arr, 1.0f);
+
         long startTime = System.currentTimeMillis();
 
         float[] leftHalf = new float[HALF];
