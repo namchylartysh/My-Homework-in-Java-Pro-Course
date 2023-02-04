@@ -7,7 +7,7 @@ package homework22;
  * @version 30.01 - 4.02
  */
 
-import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class Homework22 {
     static final int SIZE = 10_000_000;
@@ -20,21 +20,17 @@ public class Homework22 {
     }
 
     public static void firstMethod() {
-        int size = 10_000_000;
-        float[] arr = new float[size];
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = 1.0f;
-        }
+
+        float[] arr = new float[SIZE];
         long startTime = System.currentTimeMillis();
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = (float) (arr[i] * Math.sin(0.2f + arr[i] / 5) * Math.cos(0.2f + arr[i] / 5) * Math.cos(0.4f + arr[i] / 2));
-        }
+        IntStream.range(0, arr.length).forEach(i -> arr[i] = (float) (arr[i] * Math.sin(0.2f + arr[i] / 5) * Math.cos(0.2f + arr[i] / 5) * Math.cos(0.4f + arr[i] / 2)));
         System.out.println("One thread time: " + (System.currentTimeMillis() - startTime) + " ms.");
     }
 
     public static void secondMethod() throws InterruptedException {
-        int size = 10_000_000;
-        float[] arr = new float[size];
+        // Arrays.fill(arr, 1);
+//        int size = 10_000_000;
+        float[] arr = new float[SIZE];
         for (int i = 0; i < arr.length; i++) {
             arr[i] = 1.0f;
         }
@@ -47,14 +43,10 @@ public class Homework22 {
         System.arraycopy(arr, HALF, rightHalf, 0, HALF);
 
         Thread threadOne = new Thread(() -> {
-            for (int i = 0; i < leftHalf.length; i++) {
-                leftHalf[i] = (float) (leftHalf[i] * Math.sin(0.2f + leftHalf[i] / 5) * Math.cos(0.2f + leftHalf[i] / 5) * Math.cos(0.4f + leftHalf[i] / 2));
-            }
+            IntStream.range(0, leftHalf.length).forEach(i -> leftHalf[i] = (float) (leftHalf[i] * Math.sin(0.2f + leftHalf[i] / 5) * Math.cos(0.2f + leftHalf[i] / 5) * Math.cos(0.4f + leftHalf[i] / 2)));
         });
         Thread threadTwo = new Thread(() -> {
-            for (int i = 0; i < rightHalf.length; i++) {
-                rightHalf[i] = (float) (rightHalf[i] * Math.sin(0.2f + rightHalf[i] / 5) * Math.cos(0.2f + rightHalf[i] / 5) * Math.cos(0.4f + rightHalf[i] / 2));
-            }
+            IntStream.range(0, rightHalf.length).forEach(i -> rightHalf[i] = (float) (rightHalf[i] * Math.sin(0.2f + rightHalf[i] / 5) * Math.cos(0.2f + rightHalf[i] / 5) * Math.cos(0.4f + rightHalf[i] / 2)));
         });
 
         threadOne.start();
